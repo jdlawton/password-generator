@@ -1,9 +1,7 @@
-// Assignment code here
-
-
-// Get references to the #generate element SELECTS THE BUTTON FROM THE HTML PAGE, VARIABLE IS USED IN THE LISTENER AT THE BOTTOM
+// Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
+//initialize the object I use to store the password criteria as selected by the user.
 var passwordCriteria = {
   size: 0,
   lowercase: 0,
@@ -11,18 +9,17 @@ var passwordCriteria = {
   numeric: 0,
   special: 0
 }
-// PRIMARY FUNCTION THAT WILL BE CALLED WHEN THE BUTTON IS PUSHED, THIS WILL KICK OFF THE WHOLE PROCESS.
+//this function is called by the event listener "generateBtn.addEventListener" when the button is clicked.
 function writePassword() {
 
-  // prompt user to determine password criteria
+  //call function to prompt user in order to determine password criteria
   criteriaPrompts ();
 
-  //CALL A FUNCTION CALLED generatePassword
+  //calls the function that actually generates the password
   var password = generatePassword();
 
-  //THIS LINE QUERIES THE HTML DOCUMENT FOR THE ELEMENT /W ID=password, WHICH IS THE TEXT AREA WHERE THE GENERATED PASSWORD WILL BE DISPLAYED.
+  //pass the newly generated password back to the text box in the html
   var passwordText = document.querySelector("#password");
-  //passwordText.value IS THE PART OF THE HTML ELEMENT THAT WILL HOLD THE TEXT. WHATEVER YOU ASSIGN TO IT WILL BE DISPLAYED ON THE HTML TEXT AREA.
   passwordText.value = password;
 }
 
@@ -57,6 +54,7 @@ var generatePassword = function() {
   return newPassword;
 }
 
+//generates random numbers between and including min and max
 var randomNumber = function(min, max) {
   var value = Math.floor(Math.random() * (max - min + 1) + min);
 
