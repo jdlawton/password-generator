@@ -11,7 +11,6 @@ var passwordCriteria = {
   numeric: 0,
   special: 0
 }
-console.log(passwordCriteria);
 // PRIMARY FUNCTION THAT WILL BE CALLED WHEN THE BUTTON IS PUSHED, THIS WILL KICK OFF THE WHOLE PROCESS.
 function writePassword() {
 
@@ -68,25 +67,36 @@ var randomNumber = function(min, max) {
 //should include. The criteria are stored in a global object to make it easier for all parts of the 
 //program to access the criteria.
 var criteriaPrompts = function() {
-  passwordCriteria.size = window.prompt("How long should the password be? (8 - 128 characters)")
+  
+  while (passwordCriteria.size < 8 || passwordCriteria.size > 128) {
+    passwordCriteria.size = window.prompt("How long should the password be? (8 - 128 characters)")
+    if (passwordCriteria.size < 8 || passwordCriteria.size > 128) {
+      window.alert ("Please enter a password size between 8 and 128 characters!");
+    }
+  }
 
-  var lowercaseConfirm = window.confirm("Would you like to include lowercase letters?");
-  if (lowercaseConfirm) {
-    passwordCriteria.lowercase = 1;
+  while (passwordCriteria.lowercase === 0 && passwordCriteria.uppercase === 0 && passwordCriteria.numeric === 0 && passwordCriteria.special === 0) {
+    var lowercaseConfirm = window.confirm("Would you like to include lowercase letters?");
+    if (lowercaseConfirm) {
+      passwordCriteria.lowercase = 1;
+    }
+    var uppercaseConfirm = window.confirm("Would you like to include uppercase letters?");
+    if (uppercaseConfirm) {
+      passwordCriteria.uppercase = 1;
+    }
+    var numericConfirm = window.confirm("Would you like to include numbers?");
+    if (numericConfirm) {
+      passwordCriteria.numeric = 1;
+    }
+    var specialConfirm = window.confirm("Would you like to include special characters?");
+    if (specialConfirm) {
+      passwordCriteria.special = 1;
+    }
+    if (passwordCriteria.lowercase === 0 && passwordCriteria.uppercase === 0 && passwordCriteria.numeric === 0 && passwordCriteria.special === 0){
+      window.alert ("You must choose at least one type of character to include in your password!");
+    }
+    console.log(passwordCriteria);
   }
-  var uppercaseConfirm = window.confirm("Would you like to include uppercase letters?");
-  if (uppercaseConfirm) {
-    passwordCriteria.uppercase = 1;
-  }
-  var numericConfirm = window.confirm("Would you like to include numbers?");
-  if (numericConfirm) {
-    passwordCriteria.numeric = 1;
-  }
-  var specialConfirm = window.confirm("Would you like to include special characters?");
-  if (specialConfirm) {
-    passwordCriteria.special = 1;
-  }
-  console.log(passwordCriteria);
 }
 
 //these functions generate a single character from the appropriate character set and return it.
